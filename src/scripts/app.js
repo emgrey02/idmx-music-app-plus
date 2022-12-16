@@ -14,6 +14,9 @@ let enterButton = document.querySelector('.overlay__group--button');
 let playSvg = document.querySelector('.play');
 let pauseSvg = document.querySelector('.pause');
 let clearButton = document.querySelector('.clear');
+let infoTabButton = document.querySelectorAll('.info-tab-btn');
+let noteNames = document.querySelector('.notes');
+let drumsNames = document.querySelector('.drum-names');
 
 //set variables
 let notes = ['A4', 'G4', 'E4', 'D4', 'C4', 'A3'];
@@ -85,6 +88,46 @@ function removeOverlay() {
         overlay.style.display = 'none';
     }, 500);
 }
+
+//info tab functionality
+infoTabButton.forEach(tab => tab.addEventListener('pointerdown', (e) => {
+    if (tab.classList[1] == "synth") {
+        if (noteNames.className == "notes show") {
+            noteNames.classList.remove('show');
+        } else {
+            noteNames.classList.add('show');
+        }
+    } 
+    
+    if (tab.classList[1] == "drum") {
+        if (drumsNames.className == "drum-names show") {
+            drumsNames.classList.remove('show');
+        } else {
+            drumsNames.classList.add('show');
+        }
+    }
+}));
+
+infoTabButton.forEach(tab => tab.addEventListener('keydown', (e) => {
+    if (e.code == "Space" || e.code == "Enter") {
+
+        if (tab.classList[1] == "synth") {
+            if (noteNames.className == "notes show") {
+                noteNames.classList.remove('show');
+            } else {
+                noteNames.classList.add('show');
+            }
+        } 
+        
+        if (tab.classList[1] == "drum") {
+            if (drumsNames.className == "drum-names show") {
+                drumsNames.classList.remove('show');
+            } else {
+                drumsNames.classList.add('show');
+            }
+        }
+    }
+}));
 
 //music time!
 // create synth - poly synth bc we want polyphony

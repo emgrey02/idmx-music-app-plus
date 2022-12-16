@@ -18,11 +18,15 @@
 }
 
 .left-ui {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    height: 520px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3.5fr 2fr;
+    min-width: 3rem;
+   
     grid-area: leftui;
     justify-self: flex-end;
+    align-self: flex-start;
     margin-inline-end: 1em;
 }
 
