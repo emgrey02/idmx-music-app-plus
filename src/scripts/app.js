@@ -153,23 +153,27 @@ let allCells = cells.concat(drumCells).flat();
 //play sound when cell is clicked (if its unchecked)
 cells.forEach(column => {
     column.forEach(cell => cell.addEventListener('pointerdown', (e) => {
-        if (!e.target.checked) {
-            let noteIndex = e.target.classList[1].slice(4) - 1;
-            polySynth.triggerAttackRelease(notes[noteIndex], "32n");
+        if (playButton.dataset.playing != "true") {
+            if (!e.target.checked) {
+                let noteIndex = e.target.classList[1].slice(4) - 1;
+                polySynth.triggerAttackRelease(notes[noteIndex], "32n");
+                
+            }
         }
     }))
 });
 
 drumCells.forEach(column => {
     column.forEach(cell => cell.addEventListener("pointerdown", (e) => {
-        if (!e.target.checked) {
-            let noteIndex = e.target.classList[1].slice(4) - 1;
-            let currentSample = drumSamples.player(drumNames[noteIndex]);
-            currentSample.start(0, 0, "16n");
+        if (playButton.dataset.playing != "true") {
+            if (!e.target.checked) {
+                let noteIndex = e.target.classList[1].slice(4) - 1;
+                let currentSample = drumSamples.player(drumNames[noteIndex]);
+                currentSample.start(0, 0, "16n");
+            }
         }
     }))
 });
-
 
 
 // create players for our drum sounds
