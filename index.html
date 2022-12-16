@@ -13,7 +13,7 @@
 
         <header>
             <h1>Jam House</h1> 
-            <img class="logo" src="/logo/logo.png" alt="logo">
+            <img class="logo" src="/src/assets/images/logo.svg" alt="logo">
         </header>
         
         <div class="overlay">
@@ -45,19 +45,17 @@
 
                 <div class="sliders">
                     <div id="vol-ctrl">
-                        <div id="icon">
-                            <img src="/src/images/volume-btn.png" alt="volume">
-                        </div>
+                        <label for="volume">
+                            <img src="/src/assets/images/volume-svg-icon.svg" alt="volume icon">
+                        </label>
                         <input type="range" id="volume" name="volume" min="-60" max="0" value="-30" step="5">
-                        <label  for="volume"></label>
                     </div>
 
                     <div id="tempo-ctrl">
-                        <div id="icon">
-                            <img src="/src/images/metronome-svg.png" alt="metronome">
-                        </div>
+                        <label  for="tempo">
+                            <img src="/src/assets/images/tempo-svg-icon.svg" alt="tempo icon">
+                        </label>
                         <input type="range" id="tempo" name="tempo" min="0" max="300" value="100" step="10">
-                        <label  for="tempo"></label>
                     </div>
                 </div>
 
@@ -65,20 +63,32 @@
 
             <div class="left-ui">
                 <button class="synth__button">
-                    <img src="/icons/keyboard-icon.svg">
-                    <P>a</P>
-                    <P>g</P>
-                    <P>e</P>
-                    <P>d</P>
-                    <P>c</P>
-                    <P>a</P>
+                    <img src="/src/assets/images/keyboard-icon.svg" alt="keyboard icon">
+                    <div class="notes">
+                        <p>a</p>
+                        <p>g</p>
+                        <p>e</p>
+                        <p>d</p>
+                        <p>c</p>
+                        <p>a</p>
+                    </div>
+                    <svg class="arrow" width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L12 12" stroke="black" stroke-width="2" stroke-linecap="square"/>
+                        <path d="M12 12L2 2" stroke="black" stroke-width="2" stroke-linecap="square"/>
+                    </svg>
                 </button>
                 <button class="drum__button">
-                    <img src="/icons/drums-icon.svg">
-                    <P>hihat</P>
-                    <P>clap</P>
-                    <P>snare</P>
-                    <P>bass</P>
+                    <img src="/src/assets/images/drums-icon.svg" alt="drum icon">
+                    <div class="drum-names">
+                        <p>hihat</p>
+                        <p>clap</p>
+                        <p>tom</p>
+                        <p>bass</p>
+                    </div>
+                    <svg class="arrow" width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L12 12" stroke="black" stroke-width="2" stroke-linecap="square"/>
+                        <path d="M12 12L2 2" stroke="black" stroke-width="2" stroke-linecap="square"/>
+                    </svg>
                 </button>
             </div>
 
@@ -298,16 +308,12 @@
                         <input class="cell cell2" type="checkbox" />
                         <input class="cell cell3" type="checkbox" />
                         <input class="cell cell4" type="checkbox" />
-                        </class>
-                        </class>
                     </div>
                     <div class="drum-seq__column light-gray">
                         <input class="cell cell1" type="checkbox" />
                         <input class="cell cell2" type="checkbox" />
                         <input class="cell cell3" type="checkbox" />
                         <input class="cell cell4" type="checkbox" />
-                        </class>
-                        </class>
                     </div>
                     <div class="drum-seq__column light-gray">
                         <input class="cell cell1" type="checkbox" />
@@ -321,6 +327,7 @@
 
             <div class="right-ui">
                 <fieldset aria-label="change sounds" id="synth-ctrl">
+
                     <label class="radio-control" for="sinewave">
                         <input class="radio-control--input" name="waveform" value="sine" id="sinewave" type="radio" checked>
                         <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">

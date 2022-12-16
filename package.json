@@ -18,13 +18,10 @@
   "homepage": "https://github.com/RVCC-IDMX/2022-idmx-291-music-app#readme",
   "dependencies": {
     "@parcel/transformer-sass": "^2.7.0",
-    "nexusui": "^2.1.6",
     "sass": "^1.55.0",
     "tone": "^14.7.77"
   },
   "devDependencies": {
-    "@parcel/optimizer-data-url": "^2.7.0",
-    "@parcel/transformer-inline-string": "^2.7.0",
     "parcel": "^2.7.0"
   }
 }
