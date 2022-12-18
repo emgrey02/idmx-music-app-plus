@@ -20,16 +20,16 @@
     overflow: hidden;
 
     &.drum {
-        top: 34rem;
+        top: 36rem;
 
         @media (min-width: 1100px) {
-            top: 41rem;
+            top: 34rem;
         }
     }
 
     .notes, .drum-names {
         transform: scaley(0);
-        grid-gap: 1.65em;
+        grid-gap: 1.5em;
         transform-origin: top;
         transition: transform 200ms ease, margin-bottom 200ms ease;
     }

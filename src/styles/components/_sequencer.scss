@@ -1,15 +1,17 @@
 .sequencer, .drum-seq {
-    margin-block-end: 4rem;
+    margin-block-end: 7rem;
+    margin-inline-end: 2.5rem;
     display: flex;
-    justify-content: center;
+    gap: 2.8rem;
 
     &__column {
         display: flex;
         flex-direction: column;
+        gap: 2.8rem;
     }
 
     .cell {
-        margin: 1.02rem;
+        appearance: none;
         position: relative;
 
         &.my-turn {
@@ -21,14 +23,12 @@
         &::before {
             content: "";
             cursor: pointer;
-            top: -100%;
-            left: -100%;
             position: absolute;
             height: 40px;
             width: 40px;
             background-color: var(--light-gray);
             border: 1px solid var(--black);
-            border-radius: .5em;
+            border-radius: var(--border-radius);
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
             transition: box-shadow ease 220ms, transform ease 220ms, background-color ease 220ms;
         }

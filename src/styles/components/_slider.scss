@@ -3,58 +3,66 @@
     align-items: center;
 }
 
-//slider track styling
-.slider {
+//range reset
+input[type="range"] {
     -webkit-appearance: none;
-    width: 200px; 
+    width: 15rem; 
     background: transparent; 
     margin-inline: 1rem;
- 
+    cursor: pointer;
 }
 
-.slider::-webkit-slider-runnable-track {
-    -webkit-appearance: none;
+input[type="range"]:focus {
+    outline: none;
+}
+
+//track styles
+
+//chrome, safari, opera, edge (chromium browsers)
+input[type="range"]::-webkit-slider-runnable-track {
     height: 1rem;
     border-radius: 0.75rem;
     background: var(--slider);
     border: var(--border-thickness) solid;
 }
 
-
-.slider::-moz-range-track {
-    -webkit-appearance: none;
-    height: 1.5rem;
+//firefox
+input[type="range"]::-moz-range-track {
+    height: .8rem;
     border-radius: 0.75rem;
-    background: var(--slider);
+    background: var(--light-gray);
+    border: var(--border-thickness) solid;
 }
 
-.slider::-moz-range-progress {
+//left side of thumb
+input[type="range"]::-moz-range-progress {
     background: var(--slider);
-    height: 1.5rem;
-    border-radius: 0.75rem 0 0 0.75rem;
+    height: .8rem;
+    border-radius: .75rem;
+    border: var(--border-thickness) solid;
 }
 
-.slider::-ms-track {
-    -webkit-appearance: none;
-    height: 1.5rem;
-    border-radius: 0.75rem;
-    background: transparent;
-    color: transparent;
-    border: 0;
-}
+// input[type="range"]::-ms-track {
+//     -webkit-appearance: none;
+//     height: 1.5rem;
+//     border-radius: 0.75rem;
+//     background: transparent;
+//     color: transparent;
+//     border: 0;
+// }
 
   
 //thumb styling
 
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 2rem;
-    width: 2rem;
+    height: 2.3rem;
+    width: 2.3rem;
     background: var(--slider-btn);
     border: var(--border-thickness) solid;
     border-radius: var(--border-radius);
-    margin-top: -10px;
-    cursor: pointer;
+    margin-top: -14px;
+    //cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
@@ -63,17 +71,19 @@
     width: 2rem;
     background: var(--slider-btn);
     border: var(--border-thickness) solid;
+    border-radius: var(--border-radius);
     margin-top: 0;
-    cursor: pointer;
+    //cursor: pointer;
 }
 
-.slider::-ms-thumb {
-    -webkit-appearance: none;
-    height: 2rem;
-    width: 2rem;
-    background: var(--slider-btn);
-    border: var(--border-thickness) solid;
-    margin-top: 0;
+//focus styles
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    outline: 2px solid var(--white);
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+    outline: 2px solid var(--white);
 }
 
 
