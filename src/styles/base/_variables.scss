@@ -21,14 +21,14 @@
     --purple-300: #7e80cb;
     --purple-400: #626397;
 
-    --border-radius: .3em;
+    --border-radius-sm: .3em;
     --border-thickness: 2px;
 
     --background-color: var(--purple-300);
     --welcome-background-color: var(--medium-blue);
 
     --slider: var(--purple-100);
-    --slider-btn: var(--dark-gray);
+    --slider-btn: var(--medium-gray);
 
     --slider-secondary: var(--light-blue);
     --slider-secondary-thumb: var(--dark-blue);
@@ -53,9 +53,9 @@
     --clear-btn: var(--light-red);
     --clear-btn-hover: var(--dark-red);
 
-    --play-btn: var(--purple-100);
-    --play-btn-hover: var(--purple-300)
+    --play-btn: var(--purple-300);
+    --play-btn-hover: var(--purple-100);
 
-    --border-radius: var(--border-radius);
+    --border-radius: var(--border-radius-sm);
     
 }

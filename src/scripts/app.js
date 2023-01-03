@@ -1,6 +1,5 @@
 import {Synth, PolySynth, Transport, Draw, Volume, Players, start} from 'tone';
 
-
 //load drum samples - the way parcel likes it
 const tom = require("url:../drum-samples/tom.wav");
 const kick = require('url:../drum-samples/kick.mp3');
@@ -150,7 +149,7 @@ for (let i = 0; i < numCols; i++) {
 //make array of every cell - good to have
 let allCells = cells.concat(drumCells).flat();
 
-//play sound when cell is clicked (if its unchecked)
+//play sound when cell is clicked (if its unchecked and sequencer isn't playing)
 cells.forEach(column => {
     column.forEach(cell => cell.addEventListener('pointerdown', (e) => {
         if (playButton.dataset.playing != "true") {

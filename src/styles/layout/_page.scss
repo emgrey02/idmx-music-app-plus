@@ -43,6 +43,7 @@
 }
 
 .main-container {
+    position: relative;
     display: grid;
     justify-items: center;
     grid-template-columns: 1fr auto auto 1fr;
