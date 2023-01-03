@@ -1,0 +1,34 @@
+@media (prefers-reduced-motion: no-preference) {
+    #note-one {
+        animation: moveUp1 2s linear infinite;
+    }
+
+    #note-two {
+        animation: moveUp2 2s 1s linear infinite;
+    }
+
+    #note-three {
+        animation: moveUp3 2s .5s linear infinite;
+    }
+
+    @keyframes moveUp1 {
+        0% {
+            transform: translateY(20px) translateX(10px);
+        }
+        100% {
+            transform: translateY(-50px);
+        }
+    }
+
+    @keyframes moveUp2 {
+        100% {
+            transform: translateY(-50px) translateX(10px);
+        }
+    }
+
+    @keyframes moveUp3 {
+        100% {
+            transform: translateY(-50px);
+        }
+    }
+}
