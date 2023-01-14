@@ -2,12 +2,13 @@ button {
     border: var(--border-thickness) solid black;
     padding: .5rem 2rem;
     border-radius: var(--border-radius);
-    background-color: var(--clear-btn);
+    background-color: var(--btn-primary);
     transition: box-shadow ease 200ms, transform ease 200ms, background-color ease 200ms;
     cursor: pointer;
+    text-transform: uppercase;
 
     &:hover {
-        background-color: var(--clear-btn-hover);
+        background-color: var(--btn-primary-hover);
         box-shadow: 3px 3px 0px black;
         transform: translate(-3px, -3px);
         color: var(--white);
@@ -15,6 +16,14 @@ button {
 
     &:focus {
         box-shadow: 0 0 0 3px var(--white);
+    }
+}
+
+button.secondary {
+    background-color: var(--btn-secondary);
+
+    &:hover {
+        background-color: var(--btn-secondary-hover);
     }
 }
 

@@ -40,6 +40,9 @@
 
 .bottom-ui {
     grid-area: bottomui;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 
 .main-container {

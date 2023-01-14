@@ -13,6 +13,8 @@ let enterButton = document.querySelector('.overlay__group--button');
 let playSvg = document.querySelector('.play');
 let pauseSvg = document.querySelector('.pause');
 let clearButton = document.querySelector('.clear');
+let undoButton = document.querySelector('.undo');
+let redoButton = document.querySelector('.redo');
 let infoTabButton = document.querySelectorAll('.info-tab-btn');
 let noteNames = document.querySelector('.notes');
 let drumsNames = document.querySelector('.drum-names');
@@ -149,14 +151,20 @@ for (let i = 0; i < numCols; i++) {
 //make array of every cell - good to have
 let allCells = cells.concat(drumCells).flat();
 
+//make array of cell click history
+let cellHistory = [];
+
+//make array of undo history
+let undoHistory = [];
+
 //play sound when cell is clicked (if its unchecked and sequencer isn't playing)
 cells.forEach(column => {
     column.forEach(cell => cell.addEventListener('pointerdown', (e) => {
+        cellHistory.push(e.target);
         if (playButton.dataset.playing != "true") {
             if (!e.target.checked) {
                 let noteIndex = e.target.classList[1].slice(4) - 1;
                 polySynth.triggerAttackRelease(notes[noteIndex], "32n");
-                
             }
         }
     }))
@@ -164,6 +172,7 @@ cells.forEach(column => {
 
 drumCells.forEach(column => {
     column.forEach(cell => cell.addEventListener("pointerdown", (e) => {
+        cellHistory.push(e.target);
         if (playButton.dataset.playing != "true") {
             if (!e.target.checked) {
                 let noteIndex = e.target.classList[1].slice(4) - 1;
@@ -229,9 +238,13 @@ let repeat = (time) => {
 }
 Transport.scheduleRepeat(repeat, noteInterval);
 
+//place to copy cell states so we can undo clear
+let cellStates = [];
+
 //clear button
 let clearSequencer = () => {
     for (let i = 0; i < allCells.length; i++) {
+        cellStates.push(allCells[i].checked);
         allCells[i].checked = false;
     }
 }
@@ -240,6 +253,43 @@ clearButton.addEventListener('pointerdown', clearSequencer);
 clearButton.addEventListener('keydown', (e) => {
     if (e.code === "Space" || e.code === "Enter") {
         clearSequencer();
+    }
+});
+
+
+//undo button
+let undo = () => {
+    if (cellStates.length > 0) {
+        for (let i = 0; i < allCells.length; i++) {
+            allCells[i].checked = cellStates[i];
+        }
+        cellStates = [];
+    }
+    else if (cellHistory.length >= 1) {
+        cellHistory[cellHistory.length - 1].checked = !cellHistory[cellHistory.length - 1].checked;
+        undoHistory.push(cellHistory.pop());
+    }
+}
+
+undoButton.addEventListener('pointerdown', undo);
+undoButton.addEventListener('keydown', (e) => {
+    if (e.code === "Space" || e.code === "Enter") {
+        undo();
+    }
+});
+
+//redo button
+let redo = () => {
+    if (undoHistory.length >= 1) {
+        undoHistory[undoHistory.length - 1].checked = !undoHistory[undoHistory.length - 1].checked;
+        cellHistory.push(undoHistory.pop());
+    }
+}
+
+redoButton.addEventListener('pointerdown', redo);
+redoButton.addEventListener('keydown', (e) => {
+    if (e.code === "Space" || e.code === "Enter") {
+        redo();
     }
 });
 

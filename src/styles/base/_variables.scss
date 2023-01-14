@@ -28,10 +28,8 @@
     --welcome-background-color: var(--medium-blue);
 
     --slider: var(--purple-100);
-    --slider-btn: var(--medium-gray);
-
-    --slider-secondary: var(--light-blue);
-    --slider-secondary-thumb: var(--dark-blue);
+    --slider-btn-primary: var(--light-red);
+    --slider-btn-secondary: var(--light-blue);
 
     --info-tab: var(--purple-100);
     --info-tab-btn: var(--light-orange);
@@ -50,8 +48,11 @@
     --drum-row3: var(--dark-purple);
     --drum-row4: var(--dark-blue);
 
-    --clear-btn: var(--light-red);
-    --clear-btn-hover: var(--dark-red);
+    --btn-primary: var(--light-red);
+    --btn-primary-hover: var(--dark-red);
+
+    --btn-secondary: var(--light-blue);
+    --btn-secondary-hover: var(--dark-blue);
 
     --play-btn: var(--purple-300);
     --play-btn-hover: var(--purple-100);
