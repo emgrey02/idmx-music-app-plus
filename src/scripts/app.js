@@ -1,4 +1,5 @@
-import {Synth, PolySynth, Transport, Draw, Volume, Players, start} from 'tone';
+import { Synth, PolySynth, Transport, Draw, Volume, Players, start } from 'tone';
+import '../scripts/mousetrap';
 import tom from "../assets/drum-samples/tom.wav";
 import kick from "../assets/drum-samples/kick.mp3";
 import hihat from "../assets/drum-samples/hihat.wav";
@@ -19,6 +20,18 @@ let drumsNames = document.querySelector('.drum-names');
 let trigger = document.querySelector('#trigger');
 let dialog = document.querySelector('#dialog');
 let close = document.querySelector('#close');
+
+//allow user to use keyboard shortcuts while sequencer selected
+Mousetrap.prototype.stopCallback = function(e, element, combo) {
+
+    // if the element has the class "mousetrap" then no need to stop
+    if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
+        return false;
+    }
+
+    // stop select, and textarea
+    return element.tagName == 'SELECT' || element.tagName == 'TEXTAREA' || (element.contentEditable && element.contentEditable == 'true');
+}
 
 //dialog functionality
 let openDialog = () => {
@@ -113,6 +126,9 @@ let updatePlayState = () => {
 
 reflectPlayState();
 
+//shortcut
+Mousetrap.bind('shift+p', updatePlayState);
+
 //called when enter button on welcome screen is pressed
 function removeOverlay() {
     overlay.classList.add('hide');
@@ -198,6 +214,18 @@ cells.forEach(column => {
                 polySynth.triggerAttackRelease(notes[noteIndex], "32n");
             }
         }
+    }));
+
+    column.forEach(cell => cell.addEventListener('keydown', (e) => {
+        if (e.code == "Space") {
+            cellHistory.push(e.target);
+            if (playButton.dataset.playing != "true") {
+                if (!e.target.checked) {
+                    let noteIndex = e.target.classList[1].slice(4) - 1;
+                    polySynth.triggerAttackRelease(notes[noteIndex], "32n");
+                }
+            }
+        }
     }))
 });
 
@@ -209,6 +237,18 @@ drumCells.forEach(column => {
                 let noteIndex = e.target.classList[1].slice(4) - 1;
                 let currentSample = drumSamples.player(drumNames[noteIndex]);
                 currentSample.start(0, 0, "16n");
+            }
+        }
+    }))
+    column.forEach(cell => cell.addEventListener("keydown", (e) => {
+        if (e.code == "Space") {
+            cellHistory.push(e.target);
+            if (playButton.dataset.playing != "true") {
+                if (!e.target.checked) {
+                    let noteIndex = e.target.classList[1].slice(4) - 1;
+                    let currentSample = drumSamples.player(drumNames[noteIndex]);
+                    currentSample.start(0, 0, "16n");
+                }
             }
         }
     }))
@@ -287,6 +327,9 @@ clearButton.addEventListener('keydown', (e) => {
     }
 });
 
+//shortcut
+Mousetrap.bind('shift+c', clearSequencer);
+
 
 //undo button
 let undo = () => {
@@ -309,6 +352,9 @@ undoButton.addEventListener('keydown', (e) => {
     }
 });
 
+//shortcut
+Mousetrap.bind('shift+z', undo);
+
 //redo button
 let redo = () => {
     if (undoHistory.length >= 1) {
@@ -323,6 +369,11 @@ redoButton.addEventListener('keydown', (e) => {
         redo();
     }
 });
+
+//shortcut
+Mousetrap.bind('shift+r', redo);
+
+
 
 // TODO normalize sounds
 //normalize sounds (to account for different volumes)
@@ -342,11 +393,21 @@ volSlider.addEventListener('input', () => {
     drumSamples.volume.value = volSlider.value;
 })
 
+//shortcut
+Mousetrap.bind('shift+v', () => {
+    volSlider.focus();  
+});
+
 //get ui for bpm control
 let tempoSlider = document.querySelector('#tempo');
 Transport.bpm.value = tempoSlider.value;
 tempoSlider.addEventListener('input', () => {
     Transport.bpm.value = tempoSlider.value;
+});
+
+//shortcut
+Mousetrap.bind('shift+t', () => {
+    tempoSlider.focus();  
 });
 
 // get ui to choose oscillator
@@ -363,6 +424,11 @@ waveformOptions.forEach((rButton) => {
         }
     })
 })
+
+//shortcut
+Mousetrap.bind('shift+w', () => {
+    document.querySelector('#sinewave').focus(); 
+});
 
 // create visualizer w threejs
 //https://github.com/santosharron/audio-visualizer-three-js/blob/main/script.js

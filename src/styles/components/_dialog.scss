@@ -13,6 +13,7 @@
 [role="dialog"][open] {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: var(--purple-100);
     border-radius: var(--border-radius);
     border: var(--border-thickness) solid black;
@@ -39,8 +40,12 @@
         position: absolute;
         right: 0;
         top: 0;
-        margin: 1em;
+        margin: .5em;
     }
+}
+
+.bold {
+    font-weight: bold;
 }
 
 #cover {

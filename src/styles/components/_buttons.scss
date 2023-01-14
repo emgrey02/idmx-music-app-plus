@@ -29,6 +29,12 @@ button {
         padding: .3em .5em;
     }
 }
+
+#close {
+    padding: .1rem .7rem;
+    font-size: 1.5em;
+}
+
 button.secondary {
     background-color: var(--btn-secondary);
 
