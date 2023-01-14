@@ -5,15 +5,13 @@
     left: 0;
     right: 0;
     margin: auto;
-    max-height: 30vh;
+    height: fit-content;
     max-width: 50vw;
     display: none;
 }
 
 [role="dialog"][open] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
     background-color: var(--purple-100);
     border-radius: var(--border-radius);
     border: var(--border-thickness) solid black;
@@ -21,6 +19,9 @@
 }
 
 .dialog-container {
+    display: grid;
+    place-items: center;
+    height: fit-content;
     padding: 2em;
 
     #title {
@@ -65,4 +66,10 @@
     top: 0;
     right: 0;
     margin: 1em;
+}
+
+@media (pointer:coarse) {
+    #trigger {
+        display: none;
+    }
 }
