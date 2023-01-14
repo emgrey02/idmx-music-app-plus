@@ -19,11 +19,22 @@ button {
     }
 }
 
+.undo-redo {
+    display: flex;
+    justify-content: space-between;
+    gap: 5em;
+
+    .undo,
+    .redo {
+        padding: .3em .5em;
+    }
+}
 button.secondary {
     background-color: var(--btn-secondary);
 
     &:hover {
         background-color: var(--btn-secondary-hover);
+        color: var(--black);
     }
 }
 

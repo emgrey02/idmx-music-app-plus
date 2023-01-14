@@ -16,11 +16,6 @@
             <h1>JAM HOUSE</h1> 
         </header>
 
-        <!-- <div class="lines-group">
-            <div class="line-left"></div>
-            <div class="line-right"></div>
-        </div> -->
-        
         <div class="overlay">
             <div class="overlay__group">
                 <h2 class="overlay__group--title">Welcome to the <br><span>JAM HOUSE</span><br></h2>
@@ -34,6 +29,27 @@
             </div>
         </div>
 
+        <button id="trigger" class="secondary">Keyboard Shortcuts</button>
+
+        <div id="cover"></div>
+        <div id="dialog" role="dialog" aria-labelledby="title" aria-describedby="description">
+            <div class="dialog-container">
+                <div id="title">Keyboard Shortcuts</div>
+                <div id="description">
+                    <p>Play/Pause</p>
+                    <p>ctrl + p</p>
+
+                    <p>Undo</p>
+                    <p>ctrl + z</p>
+
+                    <p>Redo</p>
+                    <p>ctrl + r</p>
+
+                </div>
+                <button id="close" aria-label="close">&times;</button>
+            </div>
+        </div>
+        
         <main class="main-container">
 
             <div class="top-ui">
@@ -374,8 +390,12 @@
 
             <div class="bottom-ui">
                 <div class="undo-redo">
-                    <button class="undo secondary">Undo</button>
-                    <button class="redo secondary">Redo</button>
+                    <button class="undo secondary">
+                        <img src="src/assets/images/undo.svg" alt="undo last action" />
+                    </button>
+                    <button class="redo secondary">
+                        <img src="src/assets/images/redo.svg" alt="redo last action" />
+                    </button>
                 </div>
                 <button class="clear">Clear</button>
             </div>

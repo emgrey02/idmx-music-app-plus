@@ -16,6 +16,39 @@ let redoButton = document.querySelector('.redo');
 let infoTabButton = document.querySelectorAll('.info-tab-btn');
 let noteNames = document.querySelector('.notes');
 let drumsNames = document.querySelector('.drum-names');
+let trigger = document.querySelector('#trigger');
+let dialog = document.querySelector('#dialog');
+let close = document.querySelector('#close');
+
+//dialog functionality
+let openDialog = () => {
+    dialog.setAttribute('open', '');
+    close.focus();
+    close.addEventListener('keydown', (e) => {
+        if (e.key == "Tab") {
+            e.preventDefault();
+        }
+    });
+
+    document.querySelector('#cover').style.display = 'block';
+    document.addEventListener('keydown', addESC);
+}
+
+let closeDialog = () => {
+    dialog.removeAttribute('open');
+    trigger.focus();
+    document.querySelector('#cover').style.display = 'none';
+    document.removeEventListener('keydown', addESC);
+}
+
+let addESC = (e) => {
+    if (e.key == "Escape") {
+        closeDialog();
+    }
+};
+
+trigger.addEventListener('click', openDialog);
+close.addEventListener('click', closeDialog);
 
 //set variables
 let notes = ['A4', 'G4', 'E4', 'D4', 'C4', 'A3'];
@@ -291,6 +324,7 @@ redoButton.addEventListener('keydown', (e) => {
     }
 });
 
+// TODO normalize sounds
 //normalize sounds (to account for different volumes)
 //let norm = new Tone.Normalize(2, 4);
 //polySynth.connect(norm);
