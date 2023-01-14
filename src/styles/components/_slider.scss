@@ -6,6 +6,7 @@
 //range reset
 input[type="range"] {
     -webkit-appearance: none;
+    appearance: none;
     width: 15rem; 
     background: transparent; 
     margin-inline: 1rem;
@@ -62,6 +63,7 @@ input[type="range"]::-moz-range-progress {
 
 .slider::-moz-range-thumb {
     -webkit-appearance: none;
+    appearance: none;
     height: 2rem;
     width: 2rem;
     background: var(--slider-btn-primary);

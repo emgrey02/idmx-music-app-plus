@@ -1,10 +1,8 @@
 import {Synth, PolySynth, Transport, Draw, Volume, Players, start} from 'tone';
-
-//load drum samples - the way parcel likes it
-const tom = require("url:../assets/drum-samples/tom.wav");
-const kick = require('url:../assets/drum-samples/kick.mp3');
-const hihat = require('url:../assets/drum-samples/hihat.wav');
-const clap = require('url:../assets/drum-samples/clap.wav');
+import tom from "../assets/drum-samples/tom.wav";
+import kick from "../assets/drum-samples/kick.mp3";
+import hihat from "../assets/drum-samples/hihat.wav";
+import clap from "../assets/drum-samples/clap.wav";
 
 // get html elements
 let overlay = document.querySelector('.overlay');

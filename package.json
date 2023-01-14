@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "This is the Final Project of IDMX 291 for Fall 2022.",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -17,11 +18,8 @@
   },
   "homepage": "https://github.com/RVCC-IDMX/2022-idmx-291-music-app#readme",
   "dependencies": {
-    "@parcel/transformer-sass": "^2.7.0",
     "sass": "^1.55.0",
-    "tone": "^14.7.77"
-  },
-  "devDependencies": {
-    "parcel": "^2.7.0"
+    "tone": "^14.7.77",
+    "vite": "^4.0.4"
   }
 }
