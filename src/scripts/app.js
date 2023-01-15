@@ -20,6 +20,8 @@ let drumsNames = document.querySelector('.drum-names');
 let trigger = document.querySelector('#trigger');
 let dialog = document.querySelector('#dialog');
 let close = document.querySelector('#close');
+let proButton = document.querySelector('.special');
+let body = document.querySelector('body');
 
 //allow user to use keyboard shortcuts while sequencer selected
 Mousetrap.prototype.stopCallback = function(e, element, combo) {
@@ -62,6 +64,16 @@ let addESC = (e) => {
 
 trigger.addEventListener('click', openDialog);
 close.addEventListener('click', closeDialog);
+
+proButton.addEventListener('click', () => {
+    if (body.classList.length < 1) {
+        body.classList.add('pro');
+        proButton.textContent = 'Exit Pro Mode';
+    } else {
+        body.classList.remove('pro');
+        proButton.textContent = "Enter Pro Mode";
+    }
+})
 
 //set variables
 let notes = ['A4', 'G4', 'E4', 'D4', 'C4', 'A3'];

@@ -12,7 +12,8 @@
 
 [role="dialog"][open] {
     display: grid;
-    background-color: var(--purple-100);
+    background-color: var(--modal-bkgd-color);
+    color: var(--black);
     border-radius: var(--border-radius);
     border: var(--border-thickness) solid black;
     z-index: 2;

@@ -6,8 +6,8 @@
     background-color: var(--info-tab);
     border-radius: var(--border-radius);
     border: var(--border-thickness) solid black;
-    margin-block-start: .3em;
     padding: .5em;
+    transition: background-color 300ms ease;
     
 
     .radio-control {
@@ -20,6 +20,7 @@
         border: 1px solid black;
         justify-items: flex-end;
         cursor: pointer;
+        transition: background-color 300ms ease;
 
         &--input {
             appearance: none;
@@ -58,6 +59,7 @@
         svg {
             align-self: center;
             margin-inline-end: .5em;
+            fill: none;
         }
     }
 }

@@ -30,6 +30,7 @@
         </div>
 
         <button id="trigger" class="secondary">Keyboard Shortcuts</button>
+        <button class="special">Enter Pro Mode</button>
 
         <div id="cover"></div>
         <div id="dialog" role="dialog" aria-labelledby="title" aria-describedby="description">
@@ -69,13 +70,13 @@
 
             <div class="top-ui">
 
-                <button data-playing="false" role="switch" aria-checked="false" class="play-pause-button">
+                <button aria-keyshortcuts="shift+p" data-playing="false" role="switch" aria-checked="false" class="play-pause-button">
                     <svg class="play" aria-label="play" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle class="play-path" cx="40" cy="40" r="40" />
                         <path d="M68.2844 11.7156C60.7292 4.16082 50.6844 0 40 0C29.3156 0 19.2708 4.16082 11.7156 11.7156C4.16082 19.2708 0 29.3156 0 40C0 50.6844 4.16082 60.7292 11.7156 68.2844C19.2708 75.8392 29.3156 80 40 80C50.6844 80 60.7292 75.8392 68.2844 68.2844C75.8392 60.7292 80 50.6844 80 40C80 29.3156 75.8392 19.2708 68.2844 11.7156ZM40 75.0515C20.6725 75.0515 4.94845 59.3275 4.94845 40C4.94845 20.6725 20.6725 4.94845 40 4.94845C59.3275 4.94845 75.0515 20.6725 75.0515 40C75.0515 59.3275 59.3275 75.0515 40 75.0515Z" fill="black"/>
-                        <path d="M30.366 25.3487L55.7324 40L30.366 54.6513V25.3487Z" fill="black" stroke="black"/>
+                        <path d="M30.366 25.3487L55.7324 40L30.366 54.6513V25.3487Z" fill="black"/>
                     </svg>
-                    <svg class="pause" aria-label="pause" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg aria-keyshortcuts="shift+p" class="pause" aria-label="pause" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle class="pause-path" cx="40" cy="40" r="40" />
                         <path d="M68.2844 11.7156C60.7292 4.16082 50.6844 0 40 0C29.3156 0 19.2708 4.16082 11.7156 11.7156C4.16082 19.2708 0 29.3156 0 40C0 50.6844 4.16082 60.7292 11.7156 68.2844C19.2708 75.8392 29.3156 80 40 80C50.6844 80 60.7292 75.8392 68.2844 68.2844C75.8392 60.7292 80 50.6844 80 40C80 29.3156 75.8392 19.2708 68.2844 11.7156ZM40 75.0515C20.6725 75.0515 4.94845 59.3275 4.94845 40C4.94845 20.6725 20.6725 4.94845 40 4.94845C59.3275 4.94845 75.0515 20.6725 75.0515 40C75.0515 59.3275 59.3275 75.0515 40 75.0515Z" fill="black"/>
                         <path d="M31 26V56" stroke="black" stroke-width="6" stroke-linecap="round"/>
@@ -88,14 +89,14 @@
                         <label for="volume">
                             <img src="/src/assets/images/volume-svg-icon.svg" alt="volume icon">
                         </label>
-                        <input class="slider" type="range" id="volume" name="volume" min="-60" max="0" value="-30" step="5">
+                        <input aria-keyshortcuts="shift+v" class="slider" type="range" id="volume" name="volume" min="-60" max="0" value="-30" step="5">
                     </div>
 
                     <div id="tempo-ctrl">
                         <label  for="tempo">
                             <img src="/src/assets/images/tempo-svg-icon.svg" alt="tempo icon">
                         </label>
-                        <input class="slider secondary" type="range" id="tempo" name="tempo" min="60" max="160" value="100" step="10">
+                        <input aria-keyshortcuts="shift+t" class="slider secondary" type="range" id="tempo" name="tempo" min="60" max="160" value="100" step="10">
                     </div>
                 </div>
 
@@ -369,7 +370,7 @@
                 <fieldset aria-label="change sounds" id="synth-ctrl">
 
                     <label class="radio-control" for="sinewave">
-                        <input class="radio-control--input" name="waveform" value="sine" id="sinewave" type="radio" checked>
+                        <input aria-keyshortcuts="shift+w" class="radio-control--input" name="waveform" value="sine" id="sinewave" type="radio" checked>
                         <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 19.152H12.7848C14.7257 6.56887 19.6142 -12.0712 24.4304 19.152C29.4044 51.3988 33.0661 37.3228 35.9494 19.152C38.2438 4.69205 42.962 -10.8427 47.2152 19.152H60" stroke="black" stroke-width="3"/>
                         </svg>
@@ -405,14 +406,45 @@
 
             <div class="bottom-ui">
                 <div class="undo-redo">
-                    <button class="undo secondary">
-                        <img src="src/assets/images/undo.svg" alt="undo last action" />
+                    <button aria-keyshortcuts="shift+z" class="undo secondary">
+                        <svg title="undo button" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_615_1546)">
+                                <path d="M28.7502 15C28.7371 18.0952 27.6801 21.0954 25.7502 23.5153C23.8203 25.9351 21.1303 27.6331 18.1156 28.3343C15.1009 29.0356 11.9377 28.6992 9.13794 27.3795C6.33815 26.0599 4.06551 23.8341 2.68772 21.0625C2.53278 20.8001 2.47903 20.4901 2.53658 20.1909C2.59413 19.8916 2.75901 19.6237 3.00022 19.4375C3.14662 19.3262 3.31577 19.2486 3.4956 19.2103C3.67542 19.1719 3.86151 19.1736 4.04058 19.2154C4.21965 19.2572 4.3873 19.338 4.53157 19.452C4.67584 19.566 4.79318 19.7104 4.87522 19.875C5.78022 21.7918 7.21398 23.4101 9.00774 24.5395C10.8015 25.6689 12.8806 26.2624 15.0002 26.25C16.8772 26.2517 18.7248 25.7837 20.3747 24.8888C22.0246 23.9938 23.4243 22.7002 24.4464 21.1258C25.4685 19.5515 26.0804 17.7464 26.2264 15.8751C26.3724 14.0038 26.0479 12.1257 25.2824 10.4119C24.5169 8.69808 23.3347 7.20303 21.8436 6.06296C20.3525 4.92288 18.5999 4.17401 16.7453 3.88457C14.8907 3.59512 12.9932 3.77429 11.2256 4.40577C9.45806 5.03725 7.87656 6.10096 6.62522 7.49999H9.93772C10.2465 7.49435 10.5475 7.5978 10.7875 7.79214C11.0276 7.98648 11.1914 8.25927 11.2502 8.56249C11.2774 8.74165 11.2653 8.92457 11.2148 9.09859C11.1643 9.27261 11.0765 9.43356 10.9576 9.5703C10.8387 9.70704 10.6915 9.81629 10.5262 9.89048C10.3609 9.96468 10.1814 10.002 10.0002 9.99999H3.75022C3.4187 9.99999 3.10076 9.8683 2.86634 9.63388C2.63192 9.39946 2.50022 9.08152 2.50022 8.74999V2.56249C2.49457 2.25367 2.59802 1.95275 2.79237 1.71268C2.98671 1.47262 3.25949 1.30878 3.56272 1.24999C3.74187 1.2228 3.92479 1.23489 4.09881 1.28541C4.27283 1.33593 4.43379 1.42368 4.57052 1.54258C4.70726 1.66149 4.81651 1.80869 4.89071 1.97401C4.9649 2.13933 5.00227 2.3188 5.00022 2.49999V5.56249C6.89002 3.56001 9.33749 2.17102 12.0257 1.57538C14.7139 0.979737 17.519 1.20489 20.0778 2.22167C22.6366 3.23845 24.8312 5.00004 26.3774 7.27831C27.9237 9.55657 28.7503 12.2466 28.7502 15Z" fill="black"/>
+                            </g>
+                            <style>
+                                body.pro .undo path,
+                                body.pro .redo path {
+                                    fill: var(--lighter-gray);
+                                    transition: fill 300ms ease;
+                                }
+
+                                body.pro .undo:hover path,
+                                body.pro .redo:hover path {
+                                    fill: var(--black);
+                                    transition: fill 300ms ease;
+                                }
+                            </style>
+                            <defs>
+                                <clipPath id="clip0_615_1546">
+                                    <rect width="30" height="30" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
                     </button>
-                    <button class="redo secondary">
-                        <img src="src/assets/images/redo.svg" alt="redo last action" />
+                    <button aria-keyshortcuts="shift+r" class="redo secondary">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_615_1556)">
+                                <path d="M1.24978 15C1.26286 18.0952 2.31988 21.0954 4.2498 23.5153C6.17973 25.9351 8.86967 27.6331 11.8844 28.3343C14.8991 29.0356 18.0623 28.6992 20.8621 27.3795C23.6618 26.0599 25.9345 23.8341 27.3123 21.0625C27.4672 20.8001 27.521 20.4901 27.4634 20.1909C27.4059 19.8916 27.241 19.6237 26.9998 19.4375C26.8534 19.3262 26.6842 19.2486 26.5044 19.2103C26.3246 19.1719 26.1385 19.1736 25.9594 19.2154C25.7804 19.2572 25.6127 19.338 25.4684 19.452C25.3242 19.566 25.2068 19.7104 25.1248 19.875C24.2198 21.7918 22.786 23.4101 20.9923 24.5395C19.1985 25.6689 17.1194 26.2624 14.9998 26.25C13.1228 26.2517 11.2752 25.7837 9.62529 24.8888C7.9754 23.9938 6.57567 22.7002 5.55361 21.1258C4.53154 19.5515 3.91963 17.7464 3.77362 15.8751C3.62761 14.0038 3.95214 12.1257 4.71764 10.4119C5.48314 8.69808 6.66529 7.20303 8.15639 6.06296C9.64749 4.92288 11.4001 4.17401 13.2547 3.88457C15.1093 3.59512 17.0068 3.77429 18.7744 4.40577C20.5419 5.03725 22.1234 6.10096 23.3748 7.49999H20.0623C19.7535 7.49435 19.4525 7.5978 19.2125 7.79214C18.9724 7.98648 18.8086 8.25927 18.7498 8.56249C18.7226 8.74165 18.7347 8.92457 18.7852 9.09859C18.8357 9.27261 18.9235 9.43356 19.0424 9.5703C19.1613 9.70704 19.3085 9.81629 19.4738 9.89048C19.6391 9.96468 19.8186 10.002 19.9998 9.99999H26.2498C26.5813 9.99999 26.8992 9.8683 27.1337 9.63388C27.3681 9.39946 27.4998 9.08152 27.4998 8.74999V2.56249C27.5054 2.25367 27.402 1.95275 27.2076 1.71268C27.0133 1.47262 26.7405 1.30878 26.4373 1.24999C26.2581 1.2228 26.0752 1.23489 25.9012 1.28541C25.7272 1.33593 25.5662 1.42368 25.4295 1.54258C25.2927 1.66149 25.1835 1.80869 25.1093 1.97401C25.0351 2.13933 24.9977 2.3188 24.9998 2.49999V5.56249C23.11 3.56001 20.6625 2.17102 17.9743 1.57538C15.2861 0.979737 12.481 1.20489 9.92216 2.22167C7.36337 3.23845 5.16877 5.00004 3.62256 7.27831C2.07635 9.55657 1.24974 12.2466 1.24978 15Z" fill="black"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_615_1556">
+                                    <rect width="30" height="30" fill="white" transform="matrix(-1 0 0 1 30 0)"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
                     </button>
                 </div>
-                <button class="clear">Clear</button>
+                <button aria-keyshortcuts="shift+c" class="clear">Clear</button>
             </div>
 
         </main>

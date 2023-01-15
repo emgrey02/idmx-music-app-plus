@@ -9,7 +9,7 @@ input[type="range"] {
     appearance: none;
     width: 15rem; 
     background: transparent; 
-    margin-inline: 1rem;
+    margin-inline-start: .3rem;
     cursor: pointer;
 }
 
@@ -23,24 +23,27 @@ input[type="range"]:focus {
 input[type="range"]::-webkit-slider-runnable-track {
     height: 1rem;
     border-radius: 0.75rem;
-    background: var(--slider);
+    background-color: var(--slider);
     border: var(--border-thickness) solid;
+    transition: background-color 300ms ease;
 }
 
 //firefox
 input[type="range"]::-moz-range-track {
     height: .8rem;
     border-radius: 0.75rem;
-    background: var(--light-gray);
+    background-color: var(--light-gray);
     border: var(--border-thickness) solid;
+    transition: background-color 300ms ease;
 }
 
 //left side of thumb (only for firefox)
 input[type="range"]::-moz-range-progress {
-    background: var(--slider);
+    background-color: var(--slider);
     height: .8rem;
     border-radius: .75rem;
     border: var(--border-thickness) solid;
+    transition: background-color 300ms ease;
 }
 
   

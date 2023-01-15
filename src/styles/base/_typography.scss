@@ -8,11 +8,9 @@
 }
 
 h1 {
-    color: black;
     font-size: var(--h1-size);
 }
 h2 {
-    color: black;
     font-family: var(--title-font), cursive;
     font-size: var(--h2-size);
     text-align: center;
@@ -21,7 +19,8 @@ h2 {
 body {
     font-family: var(--p-font), sans-serif;
     font-size: var(--p-size);
-    color: black;
+    color: var(--text-color);
+    transition: color 300ms ease;
 }
 
 input, button {
