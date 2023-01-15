@@ -1,4 +1,5 @@
-#vol-ctrl, #tempo-ctrl {
+#vol-ctrl,
+#tempo-ctrl {
     display: flex;
     align-items: center;
 }
@@ -7,8 +8,8 @@
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    width: 15rem; 
-    background: transparent; 
+    width: 15rem;
+    background: transparent;
     margin-inline-start: .3rem;
     cursor: pointer;
 }
@@ -46,7 +47,7 @@ input[type="range"]::-moz-range-progress {
     transition: background-color 300ms ease;
 }
 
-  
+
 //thumb styling
 
 .slider::-webkit-slider-thumb {
@@ -75,7 +76,7 @@ input[type="range"]::-moz-range-progress {
     margin-top: 0;
 }
 
-.secondary::--moz-range-thumb {
+.secondary::-moz-range-thumb {
     background: var(--slider-btn-secondary);
 }
 
@@ -91,6 +92,3 @@ input[type="range"]:focus::-moz-range-thumb {
     outline: 2px solid var(--white);
     background-color: var(--light-orange);
 }
-
-
- 
