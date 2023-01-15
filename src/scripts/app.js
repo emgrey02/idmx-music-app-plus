@@ -234,29 +234,19 @@ let cellHistory = [];
 //make array of undo history
 let undoHistory = [];
 
+document.addEventListener('pointerdown', (e) => {
+	console.log(e.target);
+});
+
 //play sound when cell is clicked (if its unchecked and sequencer isn't playing)
 cells.forEach((column) => {
 	column.forEach((cell) =>
-		cell.addEventListener('pointerdown', (e) => {
+		cell.addEventListener('change', (e) => {
 			cellHistory.push(e.target);
 			if (playButton.dataset.playing != 'true') {
-				if (!e.target.checked) {
+				if (e.target.checked) {
 					let noteIndex = e.target.classList[1].slice(4) - 1;
 					polySynth.triggerAttackRelease(notes[noteIndex], '32n');
-				}
-			}
-		})
-	);
-
-	column.forEach((cell) =>
-		cell.addEventListener('keydown', (e) => {
-			if (e.code == 'Space') {
-				cellHistory.push(e.target);
-				if (playButton.dataset.playing != 'true') {
-					if (!e.target.checked) {
-						let noteIndex = e.target.classList[1].slice(4) - 1;
-						polySynth.triggerAttackRelease(notes[noteIndex], '32n');
-					}
 				}
 			}
 		})
@@ -265,31 +255,15 @@ cells.forEach((column) => {
 
 drumCells.forEach((column) => {
 	column.forEach((cell) =>
-		cell.addEventListener('pointerdown', (e) => {
+		cell.addEventListener('change', (e) => {
 			cellHistory.push(e.target);
 			if (playButton.dataset.playing != 'true') {
-				if (!e.target.checked) {
+				if (e.target.checked) {
 					let noteIndex = e.target.classList[1].slice(4) - 1;
 					let currentSample = drumSamples.player(
 						drumNames[noteIndex]
 					);
 					currentSample.start(0, 0, '16n');
-				}
-			}
-		})
-	);
-	column.forEach((cell) =>
-		cell.addEventListener('keydown', (e) => {
-			if (e.code == 'Space') {
-				cellHistory.push(e.target);
-				if (playButton.dataset.playing != 'true') {
-					if (!e.target.checked) {
-						let noteIndex = e.target.classList[1].slice(4) - 1;
-						let currentSample = drumSamples.player(
-							drumNames[noteIndex]
-						);
-						currentSample.start(0, 0, '16n');
-					}
 				}
 			}
 		})

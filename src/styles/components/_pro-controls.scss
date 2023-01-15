@@ -1,6 +1,6 @@
 .pro-controls {
     margin-block-start: 2em;
-    display: none;
+    visibility: hidden;
     border: var(--border-thickness) solid var(--black);
     border-radius: var(--border-radius);
 
@@ -29,14 +29,22 @@
     }
 
     input {
-        appearance: none;
+        visibility: hidden;
     }
 
-    label {
+    label,
+    button {
         padding: .3em .5em;
         border: var(--border-thickness) solid var(--black);
         border-radius: var(--border-radius);
         cursor: pointer;
+
+        &:hover {
+            background-color: var(--light-orange);
+            color: var(--black);
+            box-shadow: none;
+            transform: none;
+        }
     }
 
     input:checked+label {
@@ -49,5 +57,5 @@
 }
 
 body.pro .pro-controls {
-    display: block;
+    visibility: visible;
 }
