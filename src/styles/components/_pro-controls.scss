@@ -1,0 +1,48 @@
+.pro-controls {
+    margin-block-start: 2em;
+    display: none;
+    border: var(--border-thickness) solid var(--black);
+    border-radius: var(--border-radius);
+
+    fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        padding-block-end: 1em;
+        padding-inline: 1em;
+    }
+
+    .cnt {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+
+        legend {
+            font-size: 1.3rem;
+            margin: .8rem .5rem;
+            padding: .5rem;
+            border-radius: var(--border-radius);
+            background-color: #23A093;
+        }
+    }
+
+    input {
+        appearance: none;
+    }
+
+    label {
+        padding: .3em .5em;
+        border: var(--border-thickness) solid var(--black);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+    }
+
+    input:checked+label {
+        background-color: #5651FE;
+    }
+}
+
+body.pro .pro-controls {
+    display: block;
+}

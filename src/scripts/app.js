@@ -1,9 +1,17 @@
-import { Synth, PolySynth, Transport, Draw, Volume, Players, start } from 'tone';
+import {
+	Synth,
+	PolySynth,
+	Transport,
+	Draw,
+	Volume,
+	Players,
+	start,
+} from 'tone';
 import '../scripts/mousetrap';
-import tom from "../assets/drum-samples/tom.wav";
-import kick from "../assets/drum-samples/kick.mp3";
-import hihat from "../assets/drum-samples/hihat.wav";
-import clap from "../assets/drum-samples/clap.wav";
+import tom from '../assets/drum-samples/tom.wav';
+import kick from '../assets/drum-samples/kick.mp3';
+import hihat from '../assets/drum-samples/hihat.wav';
+import clap from '../assets/drum-samples/clap.wav';
 
 // get html elements
 let overlay = document.querySelector('.overlay');
@@ -23,57 +31,61 @@ let close = document.querySelector('#close');
 let proButton = document.querySelector('.special');
 let body = document.querySelector('body');
 
-//allow user to use keyboard shortcuts while sequencer selected
-Mousetrap.prototype.stopCallback = function(e, element, combo) {
+//allow user to use keyboard shortcuts while sequencer is selected
+Mousetrap.prototype.stopCallback = function (e, element, combo) {
+	// if the element has the class "mousetrap" then no need to stop
+	if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
+		return false;
+	}
 
-    // if the element has the class "mousetrap" then no need to stop
-    if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
-        return false;
-    }
-
-    // stop select, and textarea
-    return element.tagName == 'SELECT' || element.tagName == 'TEXTAREA' || (element.contentEditable && element.contentEditable == 'true');
-}
+	// stop select, and textarea
+	return (
+		element.tagName == 'SELECT' ||
+		element.tagName == 'TEXTAREA' ||
+		(element.contentEditable && element.contentEditable == 'true')
+	);
+};
 
 //dialog functionality
 let openDialog = () => {
-    dialog.setAttribute('open', '');
-    close.focus();
-    close.addEventListener('keydown', (e) => {
-        if (e.key == "Tab") {
-            e.preventDefault();
-        }
-    });
+	dialog.setAttribute('open', '');
+	close.focus();
+	close.addEventListener('keydown', (e) => {
+		if (e.key == 'Tab') {
+			e.preventDefault();
+		}
+	});
 
-    document.querySelector('#cover').style.display = 'block';
-    document.addEventListener('keydown', addESC);
-}
+	document.querySelector('#cover').style.display = 'block';
+	document.addEventListener('keydown', addESC);
+};
 
 let closeDialog = () => {
-    dialog.removeAttribute('open');
-    trigger.focus();
-    document.querySelector('#cover').style.display = 'none';
-    document.removeEventListener('keydown', addESC);
-}
+	dialog.removeAttribute('open');
+	trigger.focus();
+	document.querySelector('#cover').style.display = 'none';
+	document.removeEventListener('keydown', addESC);
+};
 
 let addESC = (e) => {
-    if (e.key == "Escape") {
-        closeDialog();
-    }
+	if (e.key == 'Escape') {
+		closeDialog();
+	}
 };
 
 trigger.addEventListener('click', openDialog);
 close.addEventListener('click', closeDialog);
 
+//enter/exit pro mode button
 proButton.addEventListener('click', () => {
-    if (body.classList.length < 1) {
-        body.classList.add('pro');
-        proButton.textContent = 'Exit Pro Mode';
-    } else {
-        body.classList.remove('pro');
-        proButton.textContent = "Enter Pro Mode";
-    }
-})
+	if (body.classList.length < 1) {
+		body.classList.add('pro');
+		proButton.textContent = 'Exit Pro Mode';
+	} else {
+		body.classList.remove('pro');
+		proButton.textContent = 'Enter Pro Mode';
+	}
+});
 
 //set variables
 let notes = ['A4', 'G4', 'E4', 'D4', 'C4', 'A3'];
@@ -84,57 +96,56 @@ let numCols = 16;
 let noteInterval = `${numCols}n`;
 
 //enterButton on welcome screen
-enterButton.addEventListener('pointerdown', async () => { 
-    removeOverlay();
+enterButton.addEventListener('pointerdown', async () => {
+	removeOverlay();
 
-    //create context
-    await start();
-})
+	//create context
+	await start();
+});
 
-enterButton.addEventListener('keydown', async (e) => { 
-    if (e.code === "Space" || e.code === "Enter") {     
-        removeOverlay();
+enterButton.addEventListener('keydown', async (e) => {
+	if (e.code === 'Space' || e.code === 'Enter') {
+		removeOverlay();
 
-        //create context
-        await start();
-    }
-})
+		//create context
+		await start();
+	}
+});
 
 //playButton stuff
 playButton.addEventListener('pointerdown', () => {
-    updatePlayState();
+	updatePlayState();
 });
 
 playButton.addEventListener('keydown', (e) => {
-    if (e.code === "Space" || e.code === "Enter") {
-        updatePlayState();
-    }
-})
+	if (e.code === 'Space' || e.code === 'Enter') {
+		updatePlayState();
+	}
+});
 
 let reflectPlayState = () => {
-    if (playButton.dataset.playing === "false") {
-        playSvg.style.display = 'block';
-        pauseSvg.style.display = 'none';
-    } else {
-        playSvg.style.display = 'none';
-        pauseSvg.style.display = 'block';
-    }
-}
+	if (playButton.dataset.playing === 'false') {
+		playSvg.style.display = 'block';
+		pauseSvg.style.display = 'none';
+	} else {
+		playSvg.style.display = 'none';
+		pauseSvg.style.display = 'block';
+	}
+};
 
 // start/stop sound based on play/pause button
 let updatePlayState = () => {
-    if (playButton.dataset.playing === "false") {
-        playButton.dataset.playing = "true";
-        playButton.ariaChecked = "true";
-        Transport.start("+0.1");
-    } else {
-        playButton.dataset.playing = "false";
-        playButton.ariaChecked = "false";
-        Transport.stop();
-        
-    }
-    reflectPlayState();
-}
+	if (playButton.dataset.playing === 'false') {
+		playButton.dataset.playing = 'true';
+		playButton.ariaChecked = 'true';
+		Transport.start('+0.1');
+	} else {
+		playButton.dataset.playing = 'false';
+		playButton.ariaChecked = 'false';
+		Transport.stop();
+	}
+	reflectPlayState();
+};
 
 reflectPlayState();
 
@@ -143,51 +154,54 @@ Mousetrap.bind('shift+p', updatePlayState);
 
 //called when enter button on welcome screen is pressed
 function removeOverlay() {
-    overlay.classList.add('hide');
-    setTimeout(() => {
-        overlay.style.display = 'none';
-    }, 500);
+	overlay.classList.add('hide');
+	setTimeout(() => {
+		overlay.style.display = 'none';
+	}, 500);
 }
 
 //info tab functionality
-infoTabButton.forEach(tab => tab.addEventListener('pointerdown', (e) => {
-    if (tab.classList[1] == "synth") {
-        if (noteNames.className == "notes show") {
-            noteNames.classList.remove('show');
-        } else {
-            noteNames.classList.add('show');
-        }
-    } 
-    
-    if (tab.classList[1] == "drum") {
-        if (drumsNames.className == "drum-names show") {
-            drumsNames.classList.remove('show');
-        } else {
-            drumsNames.classList.add('show');
-        }
-    }
-}));
+infoTabButton.forEach((tab) =>
+	tab.addEventListener('pointerdown', (e) => {
+		if (tab.classList[1] == 'synth') {
+			if (noteNames.className == 'notes show') {
+				noteNames.classList.remove('show');
+			} else {
+				noteNames.classList.add('show');
+			}
+		}
 
-infoTabButton.forEach(tab => tab.addEventListener('keydown', (e) => {
-    if (e.code == "Space" || e.code == "Enter") {
+		if (tab.classList[1] == 'drum') {
+			if (drumsNames.className == 'drum-names show') {
+				drumsNames.classList.remove('show');
+			} else {
+				drumsNames.classList.add('show');
+			}
+		}
+	})
+);
 
-        if (tab.classList[1] == "synth") {
-            if (noteNames.className == "notes show") {
-                noteNames.classList.remove('show');
-            } else {
-                noteNames.classList.add('show');
-            }
-        } 
-        
-        if (tab.classList[1] == "drum") {
-            if (drumsNames.className == "drum-names show") {
-                drumsNames.classList.remove('show');
-            } else {
-                drumsNames.classList.add('show');
-            }
-        }
-    }
-}));
+infoTabButton.forEach((tab) =>
+	tab.addEventListener('keydown', (e) => {
+		if (e.code == 'Space' || e.code == 'Enter') {
+			if (tab.classList[1] == 'synth') {
+				if (noteNames.className == 'notes show') {
+					noteNames.classList.remove('show');
+				} else {
+					noteNames.classList.add('show');
+				}
+			}
+
+			if (tab.classList[1] == 'drum') {
+				if (drumsNames.className == 'drum-names show') {
+					drumsNames.classList.remove('show');
+				} else {
+					drumsNames.classList.add('show');
+				}
+			}
+		}
+	})
+);
 
 //music time!
 // create synth - poly synth bc we want polyphony
@@ -196,15 +210,19 @@ let polySynth = new PolySynth(Synth).toDestination();
 // get synth sequencer
 let cells = [];
 for (let i = 0; i < numCols; i++) {
-    let currentCol = document.querySelectorAll(`.sequencer__column:nth-child(${i + 1}) .cell`);
-    cells.push(Array.from(currentCol));
+	let currentCol = document.querySelectorAll(
+		`.sequencer__column:nth-child(${i + 1}) .cell`
+	);
+	cells.push(Array.from(currentCol));
 }
 
 // get separate drum sequencer
 let drumCells = [];
 for (let i = 0; i < numCols; i++) {
-    let currentCol = document.querySelectorAll(`.drum-seq__column:nth-child(${i + 1}) .cell`);
-    drumCells.push(Array.from(currentCol));
+	let currentCol = document.querySelectorAll(
+		`.drum-seq__column:nth-child(${i + 1}) .cell`
+	);
+	drumCells.push(Array.from(currentCol));
 }
 
 //make array of every cell - good to have
@@ -217,68 +235,79 @@ let cellHistory = [];
 let undoHistory = [];
 
 //play sound when cell is clicked (if its unchecked and sequencer isn't playing)
-cells.forEach(column => {
-    column.forEach(cell => cell.addEventListener('pointerdown', (e) => {
-        cellHistory.push(e.target);
-        if (playButton.dataset.playing != "true") {
-            if (!e.target.checked) {
-                let noteIndex = e.target.classList[1].slice(4) - 1;
-                polySynth.triggerAttackRelease(notes[noteIndex], "32n");
-            }
-        }
-    }));
+cells.forEach((column) => {
+	column.forEach((cell) =>
+		cell.addEventListener('pointerdown', (e) => {
+			cellHistory.push(e.target);
+			if (playButton.dataset.playing != 'true') {
+				if (!e.target.checked) {
+					let noteIndex = e.target.classList[1].slice(4) - 1;
+					polySynth.triggerAttackRelease(notes[noteIndex], '32n');
+				}
+			}
+		})
+	);
 
-    column.forEach(cell => cell.addEventListener('keydown', (e) => {
-        if (e.code == "Space") {
-            cellHistory.push(e.target);
-            if (playButton.dataset.playing != "true") {
-                if (!e.target.checked) {
-                    let noteIndex = e.target.classList[1].slice(4) - 1;
-                    polySynth.triggerAttackRelease(notes[noteIndex], "32n");
-                }
-            }
-        }
-    }))
+	column.forEach((cell) =>
+		cell.addEventListener('keydown', (e) => {
+			if (e.code == 'Space') {
+				cellHistory.push(e.target);
+				if (playButton.dataset.playing != 'true') {
+					if (!e.target.checked) {
+						let noteIndex = e.target.classList[1].slice(4) - 1;
+						polySynth.triggerAttackRelease(notes[noteIndex], '32n');
+					}
+				}
+			}
+		})
+	);
 });
 
-drumCells.forEach(column => {
-    column.forEach(cell => cell.addEventListener("pointerdown", (e) => {
-        cellHistory.push(e.target);
-        if (playButton.dataset.playing != "true") {
-            if (!e.target.checked) {
-                let noteIndex = e.target.classList[1].slice(4) - 1;
-                let currentSample = drumSamples.player(drumNames[noteIndex]);
-                currentSample.start(0, 0, "16n");
-            }
-        }
-    }))
-    column.forEach(cell => cell.addEventListener("keydown", (e) => {
-        if (e.code == "Space") {
-            cellHistory.push(e.target);
-            if (playButton.dataset.playing != "true") {
-                if (!e.target.checked) {
-                    let noteIndex = e.target.classList[1].slice(4) - 1;
-                    let currentSample = drumSamples.player(drumNames[noteIndex]);
-                    currentSample.start(0, 0, "16n");
-                }
-            }
-        }
-    }))
+drumCells.forEach((column) => {
+	column.forEach((cell) =>
+		cell.addEventListener('pointerdown', (e) => {
+			cellHistory.push(e.target);
+			if (playButton.dataset.playing != 'true') {
+				if (!e.target.checked) {
+					let noteIndex = e.target.classList[1].slice(4) - 1;
+					let currentSample = drumSamples.player(
+						drumNames[noteIndex]
+					);
+					currentSample.start(0, 0, '16n');
+				}
+			}
+		})
+	);
+	column.forEach((cell) =>
+		cell.addEventListener('keydown', (e) => {
+			if (e.code == 'Space') {
+				cellHistory.push(e.target);
+				if (playButton.dataset.playing != 'true') {
+					if (!e.target.checked) {
+						let noteIndex = e.target.classList[1].slice(4) - 1;
+						let currentSample = drumSamples.player(
+							drumNames[noteIndex]
+						);
+						currentSample.start(0, 0, '16n');
+					}
+				}
+			}
+		})
+	);
 });
-
 
 // create players for our drum sounds
 const drumSamples = new Players({
-    urls: {
-        'hihat': hihat,
-        'clap': clap,
-        'tom': tom,
-        'kick': kick,
-    },
-    onload: () => {
-        console.log('loaded');
-    },
-    onerror: (error) => console.log(error),
+	urls: {
+		hihat: hihat,
+		clap: clap,
+		tom: tom,
+		kick: kick,
+	},
+	onload: () => {
+		console.log('loaded');
+	},
+	onerror: (error) => console.log(error),
 }).toDestination();
 
 // callback function for Tone.Transport.scheduleRepeat
@@ -286,39 +315,40 @@ const drumSamples = new Players({
 //index corresponds to columns, i corresponds to sounds
 let index = 0;
 let repeat = (time) => {
-    Draw.schedule(() => {
-        for (let i = 0; i < numRows; i++) {
-            //set variables
-            let currentNote = notes[i];
-            let currentColumn = cells[index].concat(drumCells[index]);
-            let synthCol = cells[index];
-            let drumCol = drumCells[index];
-            let previousColumn = (index === 0)
-                ? cells[numCols - 1].concat(drumCells[numCols - 1])
-                : cells[index - 1].concat(drumCells[index - 1]);
-            
-            //signal that the column is being played
-            currentColumn.forEach(cell => {
-                cell.classList.add('my-turn');
-            });
-            previousColumn.forEach(cell => {
-                cell.classList.remove('my-turn');
-            })
+	Draw.schedule(() => {
+		for (let i = 0; i < numRows; i++) {
+			//set variables
+			let currentNote = notes[i];
+			let currentColumn = cells[index].concat(drumCells[index]);
+			let synthCol = cells[index];
+			let drumCol = drumCells[index];
+			let previousColumn =
+				index === 0
+					? cells[numCols - 1].concat(drumCells[numCols - 1])
+					: cells[index - 1].concat(drumCells[index - 1]);
 
-            //play the correct sound
-            if (synthCol[i].checked) {
-                polySynth.triggerAttackRelease(currentNote, "32n", time);
-            }
-            if (drumCol[i]?.checked) {
-                let currentSample = drumSamples.player(drumNames[i]);
-                currentSample.start(0, 0, "16n");
-            }
-        }
-        //next column
-        index++;
-        index = index % 16;
-    }, time);
-}
+			//signal that the column is being played
+			currentColumn.forEach((cell) => {
+				cell.classList.add('my-turn');
+			});
+			previousColumn.forEach((cell) => {
+				cell.classList.remove('my-turn');
+			});
+
+			//play the correct sound
+			if (synthCol[i].checked) {
+				polySynth.triggerAttackRelease(currentNote, '32n', time);
+			}
+			if (drumCol[i]?.checked) {
+				let currentSample = drumSamples.player(drumNames[i]);
+				currentSample.start(0, 0, '16n');
+			}
+		}
+		//next column
+		index++;
+		index = index % 16;
+	}, time);
+};
 Transport.scheduleRepeat(repeat, noteInterval);
 
 //place to copy cell states so we can undo clear
@@ -326,42 +356,41 @@ let cellStates = [];
 
 //clear button
 let clearSequencer = () => {
-    for (let i = 0; i < allCells.length; i++) {
-        cellStates.push(allCells[i].checked);
-        allCells[i].checked = false;
-    }
-}
+	for (let i = 0; i < allCells.length; i++) {
+		cellStates.push(allCells[i].checked);
+		allCells[i].checked = false;
+	}
+};
 
 clearButton.addEventListener('pointerdown', clearSequencer);
 clearButton.addEventListener('keydown', (e) => {
-    if (e.code === "Space" || e.code === "Enter") {
-        clearSequencer();
-    }
+	if (e.code === 'Space' || e.code === 'Enter') {
+		clearSequencer();
+	}
 });
 
 //shortcut
 Mousetrap.bind('shift+c', clearSequencer);
 
-
 //undo button
 let undo = () => {
-    if (cellStates.length > 0) {
-        for (let i = 0; i < allCells.length; i++) {
-            allCells[i].checked = cellStates[i];
-        }
-        cellStates = [];
-    }
-    else if (cellHistory.length >= 1) {
-        cellHistory[cellHistory.length - 1].checked = !cellHistory[cellHistory.length - 1].checked;
-        undoHistory.push(cellHistory.pop());
-    }
-}
+	if (cellStates.length > 0) {
+		for (let i = 0; i < allCells.length; i++) {
+			allCells[i].checked = cellStates[i];
+		}
+		cellStates = [];
+	} else if (cellHistory.length >= 1) {
+		cellHistory[cellHistory.length - 1].checked =
+			!cellHistory[cellHistory.length - 1].checked;
+		undoHistory.push(cellHistory.pop());
+	}
+};
 
 undoButton.addEventListener('pointerdown', undo);
 undoButton.addEventListener('keydown', (e) => {
-    if (e.code === "Space" || e.code === "Enter") {
-        undo();
-    }
+	if (e.code === 'Space' || e.code === 'Enter') {
+		undo();
+	}
 });
 
 //shortcut
@@ -369,26 +398,25 @@ Mousetrap.bind('shift+z', undo);
 
 //redo button
 let redo = () => {
-    if (undoHistory.length >= 1) {
-        undoHistory[undoHistory.length - 1].checked = !undoHistory[undoHistory.length - 1].checked;
-        cellHistory.push(undoHistory.pop());
-    }
-}
+	if (undoHistory.length >= 1) {
+		undoHistory[undoHistory.length - 1].checked =
+			!undoHistory[undoHistory.length - 1].checked;
+		cellHistory.push(undoHistory.pop());
+	}
+};
 
 redoButton.addEventListener('pointerdown', redo);
 redoButton.addEventListener('keydown', (e) => {
-    if (e.code === "Space" || e.code === "Enter") {
-        redo();
-    }
+	if (e.code === 'Space' || e.code === 'Enter') {
+		redo();
+	}
 });
 
 //shortcut
 Mousetrap.bind('shift+r', redo);
 
-
-
-// TODO normalize sounds
-//normalize sounds (to account for different volumes)
+// TODO: normalize sounds
+// * normalize sounds (to account for different volumes)
 //let norm = new Tone.Normalize(2, 4);
 //polySynth.connect(norm);
 //drumSamples.connect(norm);
@@ -401,171 +429,45 @@ drumSamples.connect(volume);
 polySynth.volume.value = volSlider.value;
 drumSamples.volume.value = volSlider.value;
 volSlider.addEventListener('input', () => {
-    polySynth.volume.value = volSlider.value;
-    drumSamples.volume.value = volSlider.value;
-})
+	polySynth.volume.value = volSlider.value;
+	drumSamples.volume.value = volSlider.value;
+});
 
 //shortcut
 Mousetrap.bind('shift+v', () => {
-    volSlider.focus();  
+	volSlider.focus();
 });
 
 //get ui for bpm control
 let tempoSlider = document.querySelector('#tempo');
 Transport.bpm.value = tempoSlider.value;
 tempoSlider.addEventListener('input', () => {
-    Transport.bpm.value = tempoSlider.value;
+	Transport.bpm.value = tempoSlider.value;
 });
 
 //shortcut
 Mousetrap.bind('shift+t', () => {
-    tempoSlider.focus();  
+	tempoSlider.focus();
 });
 
 // get ui to choose oscillator
 let chooseWaveform = document.querySelector('#synth-ctrl');
-let waveformOptions = chooseWaveform.querySelectorAll("input");
+let waveformOptions = chooseWaveform.querySelectorAll('input');
 waveformOptions.forEach((rButton) => {
-    rButton.addEventListener('input', (e) => {
-        if (e.target.checked) {
-            polySynth.set({
-                oscillator: {
-                    type: e.target.value,
-                }
-            })
-        }
-    })
-})
+	rButton.addEventListener('input', (e) => {
+		if (e.target.checked) {
+			polySynth.set({
+				oscillator: {
+					type: e.target.value,
+				},
+			});
+		}
+	});
+});
 
 //shortcut
 Mousetrap.bind('shift+w', () => {
-    document.querySelector('#sinewave').focus(); 
+	document.querySelector('#sinewave').focus();
 });
 
-// create visualizer w threejs
-//https://github.com/santosharron/audio-visualizer-three-js/blob/main/script.js
-//used ^ to help, but it uses an older version of threejs...
-
-//get analyser from webaudio api, not tonejs or threejs
-// let analyser = context.createAnalyser();
-// analyser.fftSize = 512;
-
-// //connect analyser to our sources
-// polySynth.chain(analyser, Destination);
-// drumSamples.chain(analyser, Destination);
-
-// //length is half the fft, create array to hold info
-// let bufferLength = analyser.frequencyBinCount;
-// let dataArray = new Uint8Array(bufferLength);
-
-// //do threejs stuff
-// let scene = new Scene();
-// let camera = new PerspectiveCamera(45, 1, 1, 100);
-
-// let renderer = new WebGLRenderer({ alpha: true, antialias: true });
-// renderer.setSize(500, 500);
-// document.body.appendChild(renderer.domElement);
-
-// // geometry + material = ball mesh
-// let icoGeo = new IcosahedronGeometry(1, 2);
-// let lambertMaterial = new MeshLambertMaterial({
-//     color: 0x9999ce,
-//     wireframe: true
-// });
-// let ball = new Mesh(icoGeo, lambertMaterial);
-// scene.add(ball);
-// camera.position.z = 6;
-
-// //lighting
-// let ambientLight = new AmbientLight(0xbbbbbb);
-// scene.add(ambientLight);
-
-// let spotLight = new SpotLight(0xff00ff);
-// spotLight.intesity = 0.3;
-// spotLight.position.set(-5, 20, 10);
-// spotLight.lookAt(ball);
-// spotLight.castShadow = true;
-// scene.add(spotLight);
-
-// //helper functions
-// let fractionate = (val, minVal, maxVal) => {
-//     return (val - minVal) / (maxVal - minVal);
-// }
-
-// let modulate = (val, minVal, maxVal, outMin, outMax) => {
-//     var fr = fractionate(val, minVal, maxVal);
-//     var delta = outMax - outMin;
-//     return outMin + (fr * delta);
-// }
-
-// let avg = (arr) => {
-//     var total = arr.reduce(function (sum, b) { return sum + b; });
-//     return (total / arr.length);
-// }
-
-// let max = (arr) => {
-//     return arr.reduce(function (a, b) { return Math.max(a, b); })
-// }
-// //end helper functions
-
-// let warpBall = (mesh, bassFr, treFr) => {
-//     //get all the vertices
-//     let posAtt = mesh.geometry.getAttribute('position');
-//     //create vector3 to hold single vertex
-//     let vertex = new Vector3();
-//     //loop through each vertex
-//     for (let i = 0; i < posAtt.count; i++) {
-//         //get current vertex
-//         vertex.fromBufferAttribute(posAtt, i);
-
-//         //variables
-//         let offset = mesh.geometry.parameters.radius;
-//         var amp = 1;
-//         var time = window.performance.now();
-
-//         //normalize vertex - change distance to 1, just get direction (unit vector)
-//         vertex.normalize();
-
-//         //idk what this is, also don't understand noise...
-//         var rf = 0.00001;
-//         let noise3d = createNoise3D();
-
-//         //calculate new distance based off of bass and treble frequencies
-//         var distance = (offset + bassFr) + noise3d(vertex.x + time * rf * 7, vertex.y + time * rf * 8, vertex.z + time * rf * 9) * amp * treFr;
-
-//         //multiply x y z values of vector by the new distance
-//         vertex.multiplyScalar(distance);
-
-//         //actually set the vertex to its new values
-//         mesh.geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
-//     }
-//     //need this for some reason or else verteces won't update
-//     mesh.geometry.attributes.position.needsUpdate = true;
-// }
-
-// let render = () => {
-//     analyser.getByteFrequencyData(dataArray);
-
-//     var lowerHalfArray = dataArray.slice(0, (dataArray.length/2) - 1);
-//     var upperHalfArray = dataArray.slice((dataArray.length/2) - 1, dataArray.length - 1);
-
-//     var lowerMax = max(lowerHalfArray);
-//     var upperAvg = avg(upperHalfArray);
-
-//     var lowerMaxFr = lowerMax / lowerHalfArray.length;
-//     var upperAvgFr = upperAvg / upperHalfArray.length;
-
-//     warpBall(ball, modulate(Math.pow(lowerMaxFr, 1), 0, .5, 0, .2), modulate(upperAvgFr, 0, .5, 0, .5));
-
-//     ball.rotation.y += 0.005;
-//     ball.rotation.x += 0.002;
-//     ball.rotation.z += 0.003;
-
-//     renderer.render(scene, camera);
-//     requestAnimationFrame(render);
-// }
-
-// render();
-
-
-
+// * pro mode time
