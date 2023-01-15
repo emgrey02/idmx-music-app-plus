@@ -41,6 +41,10 @@
     input:checked+label {
         background-color: #5651FE;
     }
+
+    input:focus+label {
+        box-shadow: 0 0 0 2px var(--lighter-gray);
+    }
 }
 
 body.pro .pro-controls {

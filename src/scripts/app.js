@@ -471,3 +471,88 @@ Mousetrap.bind('shift+w', () => {
 });
 
 // * pro mode time
+
+// * for changing the scale
+// TODO: need to modify notes array according to input values
+// we will keep starting notes in 4th octave (A4, A#4, B4)
+// choosing major/minor changes the interval btwn notes
+// we are only using pentatonic scales
+// * notes available: c c# d d# e f f# g g# a a# b
+// * minor pentatonic intervals (for code): c -3- d# -2- f -2- g -3- a# -2- c
+// * major pentatonic intervals (for code): c -2- d  -2- e -3- g -2- a  -3- c
+let modeRadios = document.querySelectorAll('.mode-container input');
+let scaleRadios = document.querySelectorAll('.scale-container input');
+let availNotes = [
+	'c',
+	'c#',
+	'd',
+	'd#',
+	'e',
+	'f',
+	'f#',
+	'g',
+	'g#',
+	'a',
+	'a#',
+	'b',
+];
+
+let noteIndex = 9;
+let mode = 'minor';
+let minorInts = [3, 2, 2, 3, 2];
+let majorInts = [2, 2, 3, 2, 3];
+
+modeRadios.forEach((el) =>
+	el.addEventListener('change', (e) => {
+		mode = e.target.value;
+		createScale();
+	})
+);
+
+scaleRadios.forEach((el) =>
+	el.addEventListener('change', (e) => {
+		noteIndex = availNotes.findIndex((el) => el == e.target.value);
+		createScale();
+	})
+);
+
+let createScale = () => {
+	console.log('creating scale...');
+	let newScale = [];
+	newScale.push(`${availNotes[noteIndex]}3`);
+	let octaveNum = '3';
+	if (mode == 'major') {
+		for (let i = 0; i < majorInts.length; i++) {
+			let nextIndex = noteIndex + majorInts[i];
+			if (nextIndex > 11) {
+				nextIndex = nextIndex - 12;
+				octaveNum = '4';
+			}
+			noteIndex = nextIndex;
+			newScale.push(`${availNotes[nextIndex]}${octaveNum}`);
+		}
+		notes = newScale.reverse();
+		console.log(notes);
+	} else {
+		for (let i = 0; i < minorInts.length; i++) {
+			let nextIndex = noteIndex + minorInts[i];
+			if (nextIndex > 11) {
+				nextIndex = nextIndex - 12;
+				octaveNum = '4';
+			}
+			noteIndex = nextIndex;
+			newScale.push(`${availNotes[nextIndex]}${octaveNum}`);
+		}
+		notes = newScale.reverse();
+		console.log(notes);
+	}
+	updateNoteNames();
+};
+
+let updateNoteNames = () => {
+	let i = 0;
+	document.querySelectorAll('.notes p').forEach((el) => {
+		el.textContent = notes[i];
+		i++;
+	});
+};
