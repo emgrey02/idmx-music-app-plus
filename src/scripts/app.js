@@ -94,6 +94,7 @@ let numRows = notes.length;
 let totalRows = notes.length + drumNames.length;
 let numCols = 16;
 let noteInterval = `${numCols}n`;
+let octaveNum = 3;
 
 //enterButton on welcome screen
 enterButton.addEventListener('pointerdown', async () => {
@@ -493,14 +494,13 @@ scaleRadios.forEach((el) =>
 let createScale = () => {
 	console.log('creating scale...');
 	let newScale = [];
-	newScale.push(`${availNotes[noteIndex]}3`);
-	let octaveNum = '3';
+	newScale.push(`${availNotes[noteIndex]}${octaveNum}`);
 	if (mode == 'major') {
 		for (let i = 0; i < majorInts.length; i++) {
 			let nextIndex = noteIndex + majorInts[i];
 			if (nextIndex > 11) {
 				nextIndex = nextIndex - 12;
-				octaveNum = '4';
+				octaveNum++;
 			}
 			noteIndex = nextIndex;
 			newScale.push(`${availNotes[nextIndex]}${octaveNum}`);
@@ -512,7 +512,7 @@ let createScale = () => {
 			let nextIndex = noteIndex + minorInts[i];
 			if (nextIndex > 11) {
 				nextIndex = nextIndex - 12;
-				octaveNum = '4';
+				octaveNum++;
 			}
 			noteIndex = nextIndex;
 			newScale.push(`${availNotes[nextIndex]}${octaveNum}`);
@@ -521,6 +521,7 @@ let createScale = () => {
 		console.log(notes);
 	}
 	updateNoteNames();
+	octaveNum--;
 };
 
 let updateNoteNames = () => {
@@ -530,3 +531,29 @@ let updateNoteNames = () => {
 		i++;
 	});
 };
+
+// * changing the octave
+let upOctaveButton = document.querySelector('.arrows .up');
+let downOctaveButton = document.querySelector('.arrows .down');
+let highlight = document.querySelector('.highlight');
+let transformArray = [0, 70, 140, 210, 280, 350, 422];
+
+upOctaveButton.addEventListener('pointerdown', () => {
+	if (octaveNum < 7) {
+		octaveNum++;
+		createScale();
+		highlight.style.transform = `translateX(${
+			transformArray[octaveNum - 1]
+		}px)`;
+	}
+});
+
+downOctaveButton.addEventListener('pointerdown', () => {
+	if (octaveNum > 1) {
+		octaveNum--;
+		createScale();
+		highlight.style.transform = `translateX(${
+			transformArray[octaveNum - 1]
+		}px)`;
+	}
+});

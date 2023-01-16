@@ -8,15 +8,15 @@
         display: flex;
         flex-direction: column;
         gap: 1em;
-        padding-block-end: 1em;
-        padding-inline: 1em;
+        padding: 1em;
     }
 
     .cnt {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 3rem;
+        gap: 2rem;
+        margin-block-end: 1em;
 
         legend {
             font-size: 1.3rem;
@@ -29,22 +29,27 @@
     }
 
     input {
-        visibility: hidden;
+        appearance: none;
     }
 
     label,
     button {
-        padding: .3em .5em;
+        padding: .7em 1em;
         border: var(--border-thickness) solid var(--black);
         border-radius: var(--border-radius);
         cursor: pointer;
+        box-shadow: none;
+        transform: none;
 
         &:hover {
             background-color: var(--light-orange);
             color: var(--black);
-            box-shadow: none;
-            transform: none;
         }
+    }
+
+    .octave button {
+        padding: .2em;
+        margin-inline-end: .4em;
     }
 
     input:checked+label {
@@ -58,4 +63,26 @@
 
 body.pro .pro-controls {
     visibility: visible;
+}
+
+.keyboard-cnt {
+    position: relative;
+    width: 500px;
+    margin: auto;
+    margin-block: -1em 1em;
+
+    img {
+        width: 500px;
+    }
+
+    .highlight {
+        position: absolute;
+        width: 71px;
+        height: 40px;
+        background-color: #5651FE;
+        z-index: -1;
+        margin-inline-start: 5px;
+        transform: translateX(140px);
+        transition: transform 300ms ease;
+    }
 }
