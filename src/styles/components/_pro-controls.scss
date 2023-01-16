@@ -40,6 +40,7 @@
         cursor: pointer;
         box-shadow: none;
         transform: none;
+        transition: box-shadow 300ms ease;
 
         &:hover {
             background-color: var(--light-orange);
@@ -50,6 +51,10 @@
     .octave button {
         padding: .2em;
         margin-inline-end: .4em;
+
+        &:focus {
+            box-shadow: 0 0 0 3px var(--lighter-gray);
+        }
     }
 
     input:checked+label {
@@ -57,7 +62,7 @@
     }
 
     input:focus+label {
-        box-shadow: 0 0 0 2px var(--lighter-gray);
+        box-shadow: 0 0 0 3px var(--lighter-gray);
     }
 }
 

@@ -6,6 +6,7 @@ button {
     transition: box-shadow ease 300ms, transform ease 300ms, background-color ease 300ms, border-color ease 300ms, color ease 300ms;
     cursor: pointer;
     text-transform: uppercase;
+    color: var(--black);
 
     &:hover {
         background-color: var(--btn-primary-hover);
@@ -63,6 +64,7 @@ button.special {
     margin-block-start: 5rem;
     margin-inline-end: 1em;
     background-color: var(--btn-special);
+    color: var(--black);
 
     &:hover {
         background-color: var(--btn-special-hover);
