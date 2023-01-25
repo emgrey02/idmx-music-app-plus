@@ -14,6 +14,7 @@
     .cnt {
         display: flex;
         flex-direction: row;
+        flex-wrap: nowrap;
         align-items: center;
         gap: 2rem;
         margin-block-end: 1em;
@@ -26,6 +27,12 @@
             background-color: #23A093;
             color: var(--black);
         }
+    }
+
+    .scale-container {
+        display: flex;
+        width: 100%;
+        gap: .3em;
     }
 
     input {
